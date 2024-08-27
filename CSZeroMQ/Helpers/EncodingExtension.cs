@@ -1,17 +1,19 @@
 using System.Text;
 
-namespace CSZeroMQ.Helpers;
-
-public static class EncodingExtensions
+namespace CSZeroMQ.Helpers
 {
-    /// <summary>
-    /// Creates a null-terminated string with the given encoding.
-    /// </summary>
-    /// <param name="enc">The encoding to use</param>
-    /// <param name="str">The string to use</param>
-    /// <returns></returns>
-    public static byte[] GetBytesNT(this Encoding enc, string str)
+
+    public static class EncodingExtensions
     {
-        return enc.GetBytes(str + char.MinValue);
+        /// <summary>
+        /// Creates a null-terminated string with the given encoding.
+        /// </summary>
+        /// <param name="enc">The encoding to use</param>
+        /// <param name="str">The string to use</param>
+        /// <returns></returns>
+        public static byte[] GetBytesNT(this Encoding enc, string str)
+        {
+            return enc.GetBytes(str + char.MinValue);
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace CSZeroMQSubscriber
     {
         private static void Main(string[] args)
         {
-            const string uri = "ipc://ipx_example.ipc";
+            const string uri = "ipc:///zmq/zmq-socket";
             ZMQContext context = new ZMQContext();
             ZMQSocket subSocket = new ZMQSocket(SocketType.Sub, context);
 
@@ -18,10 +18,10 @@ namespace CSZeroMQSubscriber
 
             while (true)
             {
-                var zmqMsg = subSocket.ReceiveMsg();
+                var zmqMsg = subSocket.ReceiveMsg(ReceiveFlags.DontWait);
                 if (zmqMsg != null)
                 {
-                    var decodedString = Encoding.UTF8.GetString(zmqMsg.Span);
+                    var decodedString = Encoding.UTF8.GetString(zmqMsg.Span.ToArray());
                     Console.WriteLine("Received: " + decodedString);
                 }
             }

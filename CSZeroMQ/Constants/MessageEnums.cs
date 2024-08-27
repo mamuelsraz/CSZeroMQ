@@ -1,12 +1,16 @@
-namespace CSZeroMQ.Constants;
+using System;
 
-/// <summary>
-/// ZeroMQ message properties that return int.
-/// </summary>
-public enum MessageProperty : int
+namespace CSZeroMQ.Constants
 {
-    More = 1,
-    [Obsolete]
-    SourceFD = 2,
-    Shared = 3
+
+    /// <summary>
+    /// ZeroMQ message properties that return int.
+    /// </summary>
+    public enum MessageProperty : int
+    {
+        More = 1,
+        [Obsolete]
+        SourceFD = 2,
+        Shared = 3
+    }
 }

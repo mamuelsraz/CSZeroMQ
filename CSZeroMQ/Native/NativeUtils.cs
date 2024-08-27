@@ -1,12 +1,13 @@
-namespace CSZeroMQ.Native;
-
-public static unsafe class NativeUtils
+namespace CSZeroMQ.Native
 {
-    public static long StringLengthNT(byte* str)
+    public static unsafe class NativeUtils
     {
-        byte* p;
-        for (p = str; *p != 0; p++) {}
+        public static long StringLengthNT(byte* str)
+        {
+            byte* p;
+            for (p = str; *p != 0; p++) { }
 
-        return p - str;
+            return p - str;
+        }
     }
 }

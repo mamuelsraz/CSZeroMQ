@@ -1,30 +1,34 @@
+using System;
 using System.Runtime.InteropServices;
 using CSZeroMQ.Native;
 
-namespace CSZeroMQ;
-
-/// <summary>
-/// Represents an error caused by ZeroMQ.
-/// </summary>
-public unsafe class ZMQException : ApplicationException
+namespace CSZeroMQ
 {
-    public ZMQException(int errno) : base(GetErrString(errno))
-    {
-        Errno = errno;
-    }
-    
-    public ZMQException() : this(GetErrno()) {}
 
-    private static string GetErrString(int errno)
+    /// <summary>
+    /// Represents an error caused by ZeroMQ.
+    /// </summary>
+    public unsafe class ZMQException : ApplicationException
     {
-        var errPtr = (IntPtr) ZMQ.zmq_strerror(errno);
-        return Marshal.PtrToStringAnsi(errPtr) ?? "Unknown error";
-    }
+        public ZMQException(int errno) : base(GetErrString(errno))
+        {
+            Errno = errno;
+        }
 
-    public int Errno { get; }
+        public ZMQException() : this(GetErrno()) { }
 
-    public static int GetErrno()
-    {
-        return OperatingSystem.IsWindows() ? ZMQ.zmq_errno() : Marshal.GetLastPInvokeError();
+        private static string GetErrString(int errno)
+        {
+            var errPtr = (IntPtr)ZMQ.zmq_strerror(errno);
+            return Marshal.PtrToStringAnsi(errPtr) ?? "Unknown error";
+        }
+
+        public int Errno { get; }
+
+        public static int GetErrno()
+        {
+            return ZMQ.zmq_errno();
+            //return OperatingSystem.IsWindows() ? ZMQ.zmq_errno() : Marshal.GetLastPInvokeError();
+        }
     }
 }
