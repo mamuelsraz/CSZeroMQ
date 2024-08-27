@@ -1,3 +1,4 @@
+using CSZeroMQ.Helpers;
 using System;
 
 namespace CSZeroMQ.Constants
@@ -14,19 +15,17 @@ namespace CSZeroMQ.Constants
         {
             get
             {
-                return WindowsType;
+                if (OperatingSystemExtensions.IsWindows(Environment.OSVersion) && WindowsType != null)
+                    return WindowsType;
+                else
+                {
+                    if (OperatingSystemExtensions.IsLinux(Environment.OSVersion) && LinuxType != null)
+                        return LinuxType;
+                    if (OperatingSystemExtensions.IsMacOS(Environment.OSVersion) && MacOSType != null)
+                        return MacOSType;
+                }
 
-                //if (OperatingSystem.IsWindows() && WindowsType != null)
-                //    return WindowsType;
-                //else
-                //{
-                //    if (OperatingSystem.IsLinux() && LinuxType != null)
-                //        return LinuxType;
-                //    if (OperatingSystem.IsMacOS() && MacOSType != null)
-                //        return MacOSType;
-                //}
-
-                //return BaseType;
+                return BaseType;
             }
         }
         public Type BaseType { get; init; }

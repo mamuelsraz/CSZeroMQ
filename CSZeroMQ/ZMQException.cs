@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using CSZeroMQ.Helpers;
 using CSZeroMQ.Native;
 
 namespace CSZeroMQ
@@ -28,7 +29,6 @@ namespace CSZeroMQ
         public static int GetErrno()
         {
             return ZMQ.zmq_errno();
-            //return OperatingSystem.IsWindows() ? ZMQ.zmq_errno() : Marshal.GetLastPInvokeError();
         }
     }
 }
